@@ -1,70 +1,136 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# PBPK Simulator: R6G Lung Perfusion Kinetics
 
-## Available Scripts
+A **Physiologically-Based Pharmacokinetic (PBPK) simulator** for rhodamine 6G (R6G) kinetics in lung perfusion experiments. This interactive web application allows users to:
 
-In the project directory, you can run:
+* Adjust **PBPK model parameters** using sliders.
+* Run **simulations** in real-time to observe concentration-time profiles.
+* Perform **parameter optimization** using **Least Squares Curve Fit** or **Monte Carlo** methods.
+* Compare simulation results to  **experimental or uploaded data** .
+* Download generated graphs for reporting or analysis.
 
-### `npm start`
+  ![1762971133661](image/README/1762971133661.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Table of Contents
 
-### `npm test`
+* [Features]()
+* [Installation]()
+* [Usage]()
+* [Project Structure]()
+* [PBPK Model Details]()
+* [Optimization Methods]()
+* [Future Improvements]()
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Interactive Parameter Control**
+   * Adjust model parameters such as `k2_bar`, `kminus2`, `kd3`, `deltam`, and `ps1` in real-time.
+   * Run simulations directly from the left-side control panel.
+2. **Simulation Visualization**
+   * Display model predictions as a smooth line graph.
+   * Compare with experimental data using scatter points at exact times.
+3. **Parameter Optimization**
+   * Least Squares Curve Fit (LSQ)
+   * Monte Carlo Optimization
+   * Provides  **Sum of Squared Errors (SSE)** , parameter statistics, and iteration counts.
+4. **Data Upload**
+   * Upload experimental CSV data for comparison (time vs concentration).
+   * Supports synthetic data generation if no upload is provided.
+5. **Downloadable Graphs**
+   * Export PBPK simulation plots as PNG images for reports or presentations.
+6. **Compartment Visualization**
+   * Display individual compartment concentrations: Vascular, Cytoplasm, Mitochondria, Bound.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Installation
 
-### `npm run eject`
+1. **Clone the repository:**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<pre class="overflow-visible!" data-start="2140" data-end="2230"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>git </span><span>clone</span><span> https://github.com/yourusername/pbpk-simulator.git
+</span><span>cd</span><span> pbpk-simulator
+</span></span></code></div></div></pre>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. **Install dependencies:**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<pre class="overflow-visible!" data-start="2261" data-end="2284"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>npm install
+</span></span></code></div></div></pre>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. **Run the application:**
 
-## Learn More
+<pre class="overflow-visible!" data-start="2314" data-end="2335"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>npm start
+</span></span></code></div></div></pre>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The app will run on `http://localhost:3000`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **Adjust Parameters:**
+   * Use sliders in the left panel to adjust PBPK parameters.
+2. **Run Simulation:**
+   * Click **Run Simulation** to generate model predictions.
+3. **Run Optimization (Optional):**
+   * Select optimization method (LSQ or Monte Carlo).
+   * Click **Run Optimization** to fit the model to experimental data.
+4. **Upload Experimental Data (Optional):**
+   * Upload a CSV file with columns `time,concentration` for comparison.
+5. **Download Graphs:**
+   * Click **Download Graph** to save the current plot as a PNG image.
+6. **Show Compartments:**
+   * Toggle **Show All Compartments** to view individual compartment concentrations.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Project Structure
 
-### Making a Progressive Web App
+<pre class="overflow-visible!" data-start="3113" data-end="3406"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre!"><span><span>src/
+ ├─ components/
+ │   └─ PBPKSimulator.jsx       </span><span># Main component</span><span>
+ ├─ App.jsx                     </span><span># App entry point</span><span>
+ ├─ index.js                    </span><span># React DOM render</span><span>
+ ├─ utils/
+ │   └─ pbpkModel.js            </span><span># PBPK solver & optimization functions</span><span>
+ └─ styles/
+     └─ tailwind.css
+</span></span></code></div></div></pre>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## PBPK Model Details
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+* **Compartments:** Tubing, Vascular, Cytoplasm, Mitochondria, Bound.
+* **ODE Solver:** Simplified Euler integration method.
+* **Features:**
+  * Multi-phase experimental protocols (loading, wash, uncoupler).
+  * Membrane potentials, protein binding, and metabolite fluxes.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Optimization Methods
 
-### `npm run build` fails to minify
+1. **Least Squares Curve Fit (LSQ):**
+   * Minimizes sum of squared errors between experimental and model data.
+2. **Monte Carlo Optimization:**
+   * Randomly samples parameter space.
+   * Returns best parameters, SSE, and parameter statistics (mean & std).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## Future Improvements
+
+* Add **real-time animation** of compartment changes.
+* Integrate **more advanced ODE solvers** (e.g., Runge-Kutta).
+* Include **sensitivity analysis** for parameters.
+* Allow **multiple experimental datasets** comparison.
+
+---
+
+## License
+
+MIT License © 2025 Abraham Taye
