@@ -13,7 +13,7 @@ const PBPKSimulator = () => {
     deltam: -121.415,
     ps1: 53.59
   });
-
+  
   const [optimizationMethod, setOptimizationMethod] = useState('lsqcurvefit');
   const [dataType, setDataType] = useState('normoxia');
   const [uploadedData, setUploadedData] = useState(null);
@@ -282,7 +282,7 @@ const PBPKSimulator = () => {
      setOptimizationResults({ experimentalData: syntheticData });
      runSimulation();
    }
- }, [dataType]);
+ }, [dataType, params]);
 
   const getCompartmentData = () => {
     return simulationData.filter((_, idx) => idx % 10 === 0).map(d => ({
@@ -498,14 +498,20 @@ const PBPKSimulator = () => {
          </button>
          <div ref={chartRef}>
          <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={getMainPlotData()} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+            <LineChart data={getMainPlotData()} margin={{ top: 10, right: 30, left: 20, bottom: 20 }}>
                
               <CartesianGrid strokeDasharray="3 3" stroke="#ffffff20" />
               <XAxis 
-                dataKey="time" 
-                label={{ value: 'Time (min)', position: 'insideBottom', offset: -10, fill: '#60a5fa' }}
-                stroke="#60a5fa"
-              />
+               dataKey="time"
+               type="category"       // <- important
+               ticks={[
+                  0, 0.666666667, 1.333333333, 2, 3, 4, 5, 7, 9, 10, 11, 12,
+                  13, 14, 15, 15.33333333, 15.66666667, 16, 16.33333333, 16.66666667,
+                  17, 18, 19, 20, 21, 22
+               ]}
+               label={{ value: 'Time (min)', position: 'insideBottom', offset: -30, fill: '#60a5fa' }}
+               stroke="#60a5fa"
+               />
               <YAxis 
                 label={{ value: 'Concentration (µM)', angle: -90, position: 'insideLeft', fill: '#60a5fa' }}
                 stroke="#60a5fa"
